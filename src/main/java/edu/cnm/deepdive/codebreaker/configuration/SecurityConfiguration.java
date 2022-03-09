@@ -1,4 +1,4 @@
-package edu.cnm.deepdive.codebreaker.configuratoin;
+package edu.cnm.deepdive.codebreaker.configuration;
 
 
 import java.util.List;

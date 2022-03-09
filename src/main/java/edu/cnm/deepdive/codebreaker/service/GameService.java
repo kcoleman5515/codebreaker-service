@@ -26,7 +26,7 @@ public class GameService implements AbstractGameService {
     validate(codePoints);
     game.setText(generate(codePoints, game.getLength()));
     game.setPoolSize(codePoints.length);
-    // TODO Save game using repository & return the result.
+    game.setUser(user);
     return repository.save(game);
   }
 
