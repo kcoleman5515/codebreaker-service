@@ -93,6 +93,7 @@ public class Game {
   @OneToMany(mappedBy = "game", fetch = FetchType.EAGER,
       cascade = CascadeType.ALL, orphanRemoval = true)
   @OrderBy("created ASC")
+  @JsonIgnore
   private final List<Guess> guesses = new LinkedList<>();
 
   @NonNull

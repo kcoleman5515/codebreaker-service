@@ -33,7 +33,9 @@ public class GuessController {
 
   @GetMapping(value = "/{guessId}", produces = MediaType.APPLICATION_JSON_VALUE)
   public Guess get(@PathVariable UUID gameId, @PathVariable UUID guessId) {
-    return guessService.get(guessId, gameId, userService.getCurrentUser());
+    return guessService
+        .get(guessId, gameId, userService.getCurrentUser())
+        .orElseThrow();
   }
 
   @PostMapping(
@@ -51,4 +53,12 @@ public class GuessController {
         .created(location)
         .body(created);
   }
+
+  @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
+  Iterable<Guess> get(@PathVariable UUID gameId) {
+    return guessService
+        .get(gameId, userService.getCurrentUser())
+        .orElseThrow();
+  }
+
 }
