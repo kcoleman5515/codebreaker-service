@@ -23,6 +23,10 @@ import javax.persistence.OrderBy;
 import javax.persistence.PrePersist;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+import javax.validation.constraints.Max;
+import javax.validation.constraints.Min;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 import net.minidev.json.annotate.JsonIgnore;
 import org.hibernate.annotations.CreationTimestamp;
 import org.springframework.lang.NonNull;
@@ -32,6 +36,11 @@ import org.springframework.lang.NonNull;
 @JsonInclude(Include.NON_NULL)
 @JsonPropertyOrder({"id", "created", "pool", "length", "solved", "text"})
 public class Game {
+
+  public static final int MAX_POOL_SIZE = 255;
+  public static final int MIN_POOL_SIZE = 1;
+  public static final int MAX_CODE_LENGTH = 20;
+  public static final int MIN_CODE_LENGTH = 1;
 
   @NonNull
   @Id
@@ -52,7 +61,10 @@ public class Game {
   @JsonProperty(value = "id", access = Access.READ_ONLY)
   private UUID externalKey;
 
-  @Column(nullable = false, updatable = false, length = 255)
+  @NonNull
+  @Column(nullable = false, updatable = false, length = MAX_POOL_SIZE)
+  @NotNull
+  @Size(min = MIN_POOL_SIZE, max = MAX_POOL_SIZE)
   private String pool;
 
   @Column(nullable = false,updatable = false)
@@ -60,6 +72,8 @@ public class Game {
   private int poolSize;
 
   @Column(nullable = false, updatable = false)
+  @Min(MIN_CODE_LENGTH)
+  @Max(MAX_POOL_SIZE)
   private int length;
 
   @NonNull
@@ -93,6 +107,10 @@ public class Game {
   @NonNull
   public UUID getExternalKey() {
     return externalKey;
+  }
+
+  public void setPoolSize(int poolSize) {
+    this.poolSize = poolSize;
   }
 
   public int getPoolSize() {

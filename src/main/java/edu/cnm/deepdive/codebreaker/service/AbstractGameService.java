@@ -9,7 +9,7 @@ public interface AbstractGameService {
 
   Game startGame(Game game, User user);
 
-  Guess submitGuess(Game game, Guess guess, User user);
+//  Guess submitGuess(Game game, Guess guess, User user);
 
   Game get(UUID externalKey, User user);
 
