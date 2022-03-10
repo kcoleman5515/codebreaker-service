@@ -34,7 +34,7 @@ import org.springframework.lang.NonNull;
 @SuppressWarnings("JpaDataSourceORMInspection")
 @Entity
 @JsonInclude(Include.NON_NULL)
-@JsonPropertyOrder({"id", "created", "pool", "length", "solved", "text"})
+@JsonPropertyOrder({"id", "created", "pool", "length", "guessCount", "solved", "text"})
 public class Game {
 
   public static final int MAX_POOL_SIZE = 255;
@@ -169,6 +169,9 @@ public class Game {
     return isSolved() ? text : null;
   }
 
+  public int getGuessCount() {
+    return guesses.size();
+  }
 
   @PrePersist
   private void generateAdditionalFields() {
