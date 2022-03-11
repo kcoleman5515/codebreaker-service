@@ -31,7 +31,7 @@ public class RankingController {
       @Min(Game.MIN_POOL_SIZE) @Max(Game.MAX_POOL_SIZE)
          @RequestParam(name = "pool-size", required = false, defaultValue = "3") int poolSize,
       @Min(Game.MIN_POOL_SIZE) @Max(Game.MAX_POOL_SIZE)
-         @RequestParam(name = "code_length", required = false, defaultValue = "3") int codeLength,
+         @RequestParam(name = "code-length", required = false, defaultValue = "3") int codeLength,
       @Min(1) @RequestParam(required = false, defaultValue = "10") int count,
       @Pattern(regexp = "guesses|time")
           @RequestParam(required = false, defaultValue = "guesses") String order) {
